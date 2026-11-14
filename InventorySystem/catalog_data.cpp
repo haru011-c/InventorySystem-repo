@@ -20,3 +20,4 @@ const Seed SEED[] = {
     { 1023, "Volume Mascara",             "Beauty",      4,  199,  80 },{ 1024, "Loose Setting Powder",       "Beauty",      4,  299,  42 },
     { 1025, "Brow Pencil Duo",            "Beauty",      4,  149,   9 } };
 const int SEEDS = (int)(sizeof(SEED) / sizeof(SEED[0]));
+ 
