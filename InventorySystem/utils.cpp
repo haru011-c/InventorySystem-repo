@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "console.h"
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -20,6 +21,7 @@ string readLine(const string& prompt) {
     cout << prompt;
     string s;
     if (!getline(cin, s)) throw InputClosed();
+    markNewLine();                              // ENTER moved the cursor to a new line
     return trim(s);
 }
 int readInt(const string& prompt, int lo, int hi) {
