@@ -1,4 +1,4 @@
-#include "searching.h"
+#include "lab7_searching.h"
 #include "utils.h"
 using namespace std;
 

@@ -3,13 +3,13 @@
 #include <string>
 #include "utils.h"
 #include "models.h"
-#include "product_array.h"
-#include "product_bst.h"
-#include "showcase.h"
-#include "cart.h"
-#include "wishlist.h"
-#include "action_stack.h"
-#include "order_queue.h"
+#include "lab1_dynamic_allocation.h"
+#include "lab6_bst.h"
+#include "lab3_circular_list.h"
+#include "lab2_doubly_linked_list.h"
+#include "lab2_singly_linked_list.h"
+#include "lab4_stack.h"
+#include "lab5_queue.h"
 
 class StoreApp : NoCopy {
     ProductArray items;      // owns the Products (Lab 1)

@@ -1,8 +1,8 @@
 #include "store_app.h"
 #include "catalog_data.h"
 #include "table.h"
-#include "searching.h"
-#include "sorting.h"
+#include "lab7_searching.h"
+#include "lab8_sorting.h"
 #include <iostream>
 #include <algorithm>
 using namespace std;

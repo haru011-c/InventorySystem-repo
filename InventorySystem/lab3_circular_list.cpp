@@ -1,4 +1,4 @@
-#include "showcase.h"
+#include "lab3_circular_list.h"
 using namespace std;
 
 Showcase::Showcase() : tail(nullptr), count(0) {}

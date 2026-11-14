@@ -2,7 +2,7 @@
 #pragma once
 #include "models.h"
 #include "utils.h"
-#include "product_array.h"
+#include "lab1_dynamic_allocation.h"
 
 struct TreeNode { Product* p; TreeNode* l, * r; };
 

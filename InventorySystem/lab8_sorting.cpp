@@ -1,4 +1,4 @@
-#include "sorting.h"
+#include "lab8_sorting.h"
 #include "utils.h"
 #include <algorithm>
 using namespace std;

@@ -1,4 +1,4 @@
-#include "product_array.h"
+#include "lab1_dynamic_allocation.h"
 #include <iostream>
 using namespace std;
 

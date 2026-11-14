@@ -2,7 +2,7 @@
 #pragma once
 #include <string>
 #include "models.h"
-#include "product_array.h"
+#include "lab1_dynamic_allocation.h"
 
 // O(n). Returns how many records were examined.
 int linearSearch(const ProductArray& src, const std::string& kw, ProductArray& out);

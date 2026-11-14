@@ -1,4 +1,4 @@
-#include "wishlist.h"
+#include "lab2_singly_linked_list.h"
 #include <iostream>
 using namespace std;
 

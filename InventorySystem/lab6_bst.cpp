@@ -1,4 +1,4 @@
-#include "product_bst.h"
+#include "lab6_bst.h"
 #include <algorithm>
 using namespace std;
 
