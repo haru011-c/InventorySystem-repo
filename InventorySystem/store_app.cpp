@@ -326,15 +326,15 @@ void StoreApp::run() {
     while (true) {
         const string bar(74, '=');
         cout << "\n" << bar << "\n  SHEIN INVENTORY & SEARCH SYSTEM\n" << bar << "\n"
-            << " 1. View Complete Catalog (Tabular View with Brand Affiliations)\n"
-            << " 2. Filter Products by Official Brand (e.g., SHEIN EZwear, ROMWE, DAZY)\n"
-            << " 3. Search Products by Keyword (Linear Search)\n"
-            << " 4. Filter Products by Price Range (Binary Search)\n"
-            << " 5. Add Item to Shopping Cart (Doubly Linked List Navigation)\n"
-            << " 6. Process Customer Checkout Queue (FIFO Order Queue)\n"
-            << " 7. Perform Admin Undo Action (LIFO Stack Pop)\n"
-            << " 8. Display Partner Brand Banner Showcase (Circular List Cycle)\n"
-            << " 9. Sort Inventory Display (By Price, Stock, or Brand)\n"
+            << " 1. View Complete Catalog\n"
+            << " 2. Filter Products by Official Brand\n"
+            << " 3. Search Products by Keyword\n"
+            << " 4. Filter Products by Price Range\n"
+            << " 5. Add Item to Shopping Cart\n"
+            << " 6. Process Customer Checkout Queue\n"
+            << " 7. Perform Admin Undo Action\n"
+            << " 8. Display Partner Brand Banner Showcase\n"
+            << " 9. Sort Inventory Display\n"
             << "10. Exit\n" << bar << "\n  Cart: " << cart.count << " item(s) | Pending orders: " << orders.size()
             << " | Undo stack: " << undo.size() << "\n";
         switch (readInt("Enter your choice [1-10]: ", 1, 10)) {
