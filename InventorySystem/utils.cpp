@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cerrno>
 #include <cctype>
+#include <windows.h>
 using namespace std;
 
 string str(long v) { ostringstream o; o << v; return o.str(); }
@@ -50,12 +51,20 @@ string readText(const string& prompt, size_t maxLen) {
     }
 }
 
-void clearScreen() {
-    cout.flush();                       // print anything still waiting first
 #ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
+  #ifndef NOMINMAX
+    #define NOMINMAX
+  #endif
 #endif
-    markNewLine();                      // keep the centering margin working after the clear
+
+void clearScreen() {
+    cout.flush();
+#ifdef _WIN32
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD mode = 0;
+    if (GetConsoleMode(h, &mode))
+        SetConsoleMode(h, mode | 0x0004);       // allow escape codes (ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+#endif
+    cout << "\033[2J\033[3J\033[H" << flush;    // clear screen + scrollback, cursor to top-left
+    markNewLine();                              // keep the centering margin working
 }
