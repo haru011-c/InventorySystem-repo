@@ -137,13 +137,16 @@ void StoreApp::browse() {                       // doubly linked list navigation
 }
 void StoreApp::cartMenu() {
     while (true) {
+        clearScreen();
         cout << "\n--- CART & WISHLIST | cart: " << cart.count << " item(s) ---\n"
             << "  1. Add product to cart\n  2. View cart\n  3. Browse cart (Next / Previous / Remove)\n"
             << "  4. Save product to wishlist\n  5. View wishlist\n  6. Remove from wishlist\n  7. Back\n";
-        switch (readInt("Choice [1-7]: ", 1, 7)) {
+        int c = readInt("Choice [1-7]: ", 1, 7);
+        if (c == 7) return;
+        switch (c) {
         case 1: if (Product* p = ask("Product ID to add")) addToCart(p); break;
         case 2: cart.print(); break;
-        case 3: browse(); break;
+        case 3: browse(); continue;                 // browse has its own prompts, so no extra pause
         case 4:
             if (Product* p = ask("Product ID to save"))
                 cout << (wish.add(p->id, p->name, p->price) ? "  Saved.\n" : "  [!] Already on the wishlist.\n");
@@ -154,8 +157,8 @@ void StoreApp::cartMenu() {
             if (id) cout << (wish.remove(id) ? "  Removed.\n" : "  [!] Not on the wishlist.\n");
             break;
         }
-        case 7: return;
         }
+        readLine("\n  Press ENTER to continue...");
     }
 }
 
@@ -199,11 +202,14 @@ void StoreApp::processNext() {                  // all-or-nothing: every line mu
 }
 void StoreApp::checkoutMenu() {
     while (true) {
+        clearScreen();
         cout << "\n--- CHECKOUT (Lab 5: FIFO queue) | pending orders: " << orders.size() << " ---\n"
             << "  1. Check out my cart (join the queue)\n  2. Process the NEXT order (dequeue)\n"
             << "  3. View the queue\n  4. Back\n";
         int c = readInt("Choice [1-4]: ", 1, 4);
-        if (c == 1) placeOrder(); else if (c == 2) processNext(); else if (c == 3) orders.print(); else return;
+        if (c == 4) return;
+        if (c == 1) placeOrder(); else if (c == 2) processNext(); else orders.print();
+        readLine("\n  Press ENTER to continue...");
     }
 }
 
@@ -238,14 +244,16 @@ void StoreApp::step(bool isUndo) {
     cout << (isUndo ? "  UNDONE: " : "  REDONE: ") << describe(a) << "\n";
 }
 void StoreApp::adminMenu() {
+    auto pause = [] { readLine("\n  Press ENTER to continue..."); };
     while (true) {
+        clearScreen();
         cout << "\n--- ADMIN PANEL (Lab 4: stack) | undo depth " << undo.size() << " | redo depth " << redo.size() << " ---\n"
             << "  1. Add a product\n  2. Adjust stock (+ / -)\n  3. Remove a product\n"
             << "  4. UNDO last action (pop)\n  5. REDO\n  6. View undo / redo stacks\n  7. Back\n";
         int c = readInt("Admin choice [1-7]: ", 1, 7);
         if (c == 7) return;
-        if (c == 4 || c == 5) { step(c == 4); continue; }
-        if (c == 6) { undo.print("UNDO STACK (top first)"); redo.print("REDO STACK (top first)"); continue; }
+        if (c == 4 || c == 5) { step(c == 4); pause(); continue; }
+        if (c == 6) { undo.print("UNDO STACK (top first)"); redo.print("REDO STACK (top first)"); pause(); continue; }
         Action a = {};
         if (c == 1) {
             a.type = A_ADD;
@@ -262,22 +270,23 @@ void StoreApp::adminMenu() {
         }
         else if (c == 2) {
             Product* p = ask("Product ID");
-            if (!p) continue;
+            if (!p) { pause(); continue; }
             a.type = A_STOCK;
             a.snap = *p;
             a.delta = readInt("  Units to add (+) or remove (-): ", -p->stockQuantity, 99999);
-            if (a.delta == 0) continue;
+            if (a.delta == 0) { pause(); continue; }
             p->stockQuantity += a.delta;
         }
         else {
             Product* p = ask("Product ID to remove");
-            if (!p) continue;
+            if (!p) { pause(); continue; }
             a.type = A_REMOVE;
             removeProduct(p->id, a.snap);
         }
         undo.push(a);                           // record the action; a new action clears the redo history
         redo.clear();
         cout << "  Pushed on undo stack: " << describe(a) << "\n";
+        pause();
     }
 }
 
