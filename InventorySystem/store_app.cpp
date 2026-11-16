@@ -324,6 +324,7 @@ StoreApp::~StoreApp() { for (int i = 0; i < items.size(); i++) delete items[i]; 
 
 void StoreApp::run() {
     while (true) {
+        clearScreen();                              // wipe the screen before showing the menu
         const string bar(74, '=');
         cout << "\n" << bar << "\n  SHEIN INVENTORY & SEARCH SYSTEM\n" << bar << "\n"
             << " 1. View Complete Catalog\n"

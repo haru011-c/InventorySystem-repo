@@ -49,3 +49,13 @@ string readText(const string& prompt, size_t maxLen) {
         cout << "  [!] Enter 1 to " << maxLen << " characters.\n";
     }
 }
+
+void clearScreen() {
+    cout.flush();                       // print anything still waiting first
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+    markNewLine();                      // keep the centering margin working after the clear
+}

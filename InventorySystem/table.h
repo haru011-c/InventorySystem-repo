@@ -4,3 +4,5 @@
 #include "lab1_dynamic_allocation.h"
 
 void table(const std::string& title, const ProductArray& v);
+
+void clearScreen();
